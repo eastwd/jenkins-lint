@@ -35,7 +35,12 @@ func NewClient(host string, tlsVerify bool) *Client {
 	return client
 }
 func (c *Client) FetchCrumb() error {
-	resp, err := http.Get(fmt.Sprintf(crumbUrlFormat, c.Host))
+	req, _ := http.NewRequest(
+		"GET",
+		fmt.Sprintf(crumbUrlFormat, c.Host),
+		nil,
+	)
+	resp, err := c.client.Do(req)
 	if err != nil {
 		return err
 	}
@@ -59,8 +64,7 @@ func (c *Client) Validate(jenkinsfile string) (string, error) {
 	}
 	req.Header.Set("Jenkins-Crumb", c.Crumb)
 	req.Header.Set("Content-Type", "application/x-www-form-urlencoded")
-	client := new(http.Client)
-	resp, err := client.Do(req)
+	resp, err := c.client.Do(req)
 
 	body, err := ioutil.ReadAll(resp.Body)
 	if err != nil {

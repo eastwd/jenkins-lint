@@ -26,10 +26,6 @@ var lintCmd = func(c *cli.Context) error {
 		log.Fatal(err)
 		return nil
 	}
-	s := strings.Split(jenkinsfile, "\n")
-	for i, row := range s {
-		fmt.Printf("%3d : %s\n", i+1, row)
-	}
 
 	//バリデーションの結果を取得
 	result, err := client.Validate(jenkinsfile)
@@ -38,6 +34,12 @@ var lintCmd = func(c *cli.Context) error {
 		return nil
 	}
 
+	if !strings.Contains(result, successMessage) {
+		s := strings.Split(jenkinsfile, "\n")
+		for i, row := range s {
+			fmt.Printf("%3d : %s\n", i+1, row)
+		}
+	}
 	fmt.Println(result)
 	return nil
 }
