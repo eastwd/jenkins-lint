@@ -5,7 +5,7 @@ import (
 	"log"
 	"strings"
 
-	"github.com/eastwd/jctl/jenkins"
+	"github.com/eastwd/jenkins-lint/jenkins"
 	"github.com/urfave/cli"
 )
 

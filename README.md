@@ -1,4 +1,4 @@
-# jctl
+# jenkins-lint
 
 Jenkinsfile linter
 
@@ -9,10 +9,10 @@ Jenkinsfile linter
 
 ## usage
 
-.jctl.tomlをホームディレクトリに作成
+.jenkins-lint.tomlをホームディレクトリに作成
 
 ```
-$ jctl config
+$ jenkins-lint config
 [Client]
   Host = "http://localhost:8080"
   TLSVerify = true
@@ -26,10 +26,10 @@ $ jctl config
 Jenkinsfileのパスを指定して実行
 
 ```
-$ jctl lint -f ./test/Jenkinsfile
+$ jenkins-lint -f ./test/Jenkinsfile
 Jenkinsfile successfully validated.
 
-$ jctl lint -f ./test/Jenkinsfile.failed
+$ jenkins-lint -f ./test/Jenkinsfile.failed
   1 : pipeline {
   2 :     agent {
   3 :       docker {

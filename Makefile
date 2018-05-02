@@ -1,5 +1,5 @@
-jctl:
-	go build -o jctl
+jenkins-lint:
+	go build -o jenkins-lint
 	go install
 
 run:
