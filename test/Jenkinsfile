@@ -1,0 +1,27 @@
+pipeline {
+    agent {
+      docker {
+        image 'alpine'
+        label 'linux'
+      }
+    }
+    stages {
+        stage('Build') {
+            steps {
+                echo 'hello-world'
+                sh 'whoami'
+                sh 'pwd'
+            }
+        }
+        stage('Test') {
+            steps {
+                echo 'Testing..'
+            }
+        }
+        stage('Deploy') {
+            steps {
+                echo 'Deploying....'
+            }
+        }
+    }
+}
