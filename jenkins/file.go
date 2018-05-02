@@ -17,6 +17,5 @@ func ReadJenkinsfile(filePath string) (string, error) {
 	}
 	io.Copy(buf, f)
 	s := string(buf.Bytes())
-	fmt.Println(s)
 	return s, nil
 }
