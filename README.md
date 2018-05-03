@@ -9,7 +9,7 @@ Jenkinsfile linter
 
 ## usage
 
-.jenkins-lint.tomlをホームディレクトリに作成
+.jlint.tomlをホームディレクトリに作成
 
 ```
 $ jenkins-lint config
