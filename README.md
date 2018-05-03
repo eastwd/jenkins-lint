@@ -7,12 +7,17 @@ Jenkinsfile linter
 - JenkinsのAPIにアクセスし、Jenkinsfileの構文チェックをするツール
 - 認証周りは作成中
 
+## install
+
+```
+go get -u github.com/eastwd/jenkins-lint
+```
+
 ## usage
 
 .jlint.tomlをホームディレクトリに作成
 
 ```
-$ jenkins-lint config
 [Client]
   Host = "http://localhost:8080"
   TLSVerify = true
