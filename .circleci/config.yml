@@ -3,7 +3,8 @@ jobs:
   build:
     docker:
       - image: circleci/golang:1.11
-    working_directory: /go/src/github.com/{{ORG_NAME}}/{{REPO_NAME}}
+    working_directory: /go/src/github.com/eastwd/jenkins-lint
     steps:
       - checkout
-      - run: go test
+      - run: go test ./jenkins -race -coverprofile=coverage.txt -covermode=atomic
+      - run: bash <(curl -s https://codecov.io/bash)
