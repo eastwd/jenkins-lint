@@ -14,6 +14,8 @@ type Client struct {
 	Crumb     string
 	TlsVerify bool
 	client    *http.Client
+	Username  string
+	Password  string
 }
 
 var (
@@ -21,7 +23,7 @@ var (
 	validateUrlFormat = "%s/pipeline-model-converter/validate"
 )
 
-func NewClient(host string, tlsVerify bool) *Client {
+func NewClient(host string, tlsVerify bool, username string, password string) *Client {
 	tr := &http.Transport{
 		TLSClientConfig: &tls.Config{
 			InsecureSkipVerify: tlsVerify,
@@ -29,11 +31,14 @@ func NewClient(host string, tlsVerify bool) *Client {
 	}
 	c := &http.Client{Transport: tr}
 	client := &Client{
-		Host:   host,
-		client: c,
+		Host:     host,
+		Username: username,
+		Password: password,
+		client:   c,
 	}
 	return client
 }
+
 func (c *Client) FetchCrumb() error {
 	req, _ := http.NewRequest(
 		"GET",
