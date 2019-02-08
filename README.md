@@ -5,7 +5,6 @@ Jenkinsfile linter
 ## description
 
 - JenkinsのAPIにアクセスし、Jenkinsfileの構文チェックをするツール
-- 認証周りは作成中
 
 ## install
 

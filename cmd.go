@@ -11,7 +11,8 @@ import (
 
 var lintCmd = func(c *cli.Context) error {
 	jc := config.Client
-	client := jenkins.NewClient(jc.Host, jc.TLSVerify)
+	ja := config.Account
+	client := jenkins.NewClient(jc.Host, jc.TLSVerify, ja.Username, ja.Password)
 
 	//JenkinsのCrumbを取得
 	err := client.FetchCrumb()
