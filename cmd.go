@@ -48,7 +48,7 @@ var lintCmd = func(c *cli.Context) error {
 var lintCmdFlags = []cli.Flag{
 	cli.StringFlag{
 		Name:  "file, f",
-		Value: "./Jenkinsfile",
+		Value: "Jenkinsfile",
 		Usage: "Jenkinsfileのパス",
 	},
 }
