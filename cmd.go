@@ -12,7 +12,7 @@ import (
 var lintCmd = func(c *cli.Context) error {
 	jc := config.Client
 	ja := config.Account
-	client := jenkins.NewClient(jc.Host, jc.TLSVerify, ja.Username, ja.Password)
+	client := jenkins.NewClient(jc.Host, jc.TLSVerify, ja.Username, ja.APIToken)
 
 	//JenkinsのCrumbを取得
 	err := client.FetchCrumb()
@@ -54,7 +54,7 @@ var lintCmdFlags = []cli.Flag{
 }
 
 var configCmd = func(c *cli.Context) error {
-	config.Account.Password = strings.Repeat("*", len(config.Account.Password))
+	config.Account.APIToken = strings.Repeat("*", len(config.Account.APIToken))
 	fmt.Println(config.String())
 	return nil
 }

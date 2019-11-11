@@ -21,7 +21,7 @@ type ClientConfig struct {
 
 type AccountConfig struct {
 	Username string
-	Password string
+	APIToken string
 }
 
 func NewConfig() {
@@ -39,7 +39,10 @@ func DefaultConfig() Config {
 			Host:      defaultHost,
 			TLSVerify: true,
 		},
-		Account: AccountConfig{},
+		Account: AccountConfig{
+			Username: "",
+			APIToken: "",
+		},
 	}
 }
 
