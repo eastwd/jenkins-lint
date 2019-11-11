@@ -11,11 +11,11 @@ import (
 
 type Client struct {
 	Host      string
+	Username  string
+	APIToken  string
 	Crumb     string
 	TlsVerify bool
 	client    *http.Client
-	Username  string
-	Password  string
 }
 
 var (
@@ -23,7 +23,7 @@ var (
 	validateUrlFormat = "%s/pipeline-model-converter/validate"
 )
 
-func NewClient(host string, tlsVerify bool, username string, password string) *Client {
+func NewClient(host string, tlsVerify bool, username string, apiToken string) *Client {
 	tr := &http.Transport{
 		TLSClientConfig: &tls.Config{
 			InsecureSkipVerify: tlsVerify,
@@ -33,18 +33,20 @@ func NewClient(host string, tlsVerify bool, username string, password string) *C
 	client := &Client{
 		Host:     host,
 		Username: username,
-		Password: password,
+		APIToken: apiToken,
 		client:   c,
 	}
 	return client
 }
-
 func (c *Client) FetchCrumb() error {
 	req, _ := http.NewRequest(
 		"GET",
 		fmt.Sprintf(crumbUrlFormat, c.Host),
 		nil,
 	)
+	if c.Username != "" && c.APIToken != "" {
+		req.SetBasicAuth(c.Username, c.APIToken)
+	}
 	resp, err := c.client.Do(req)
 	if err != nil {
 		return err
@@ -67,9 +69,16 @@ func (c *Client) Validate(jenkinsfile string) (string, error) {
 	if err != nil {
 		return "", nil
 	}
+	if c.Username != "" && c.APIToken != "" {
+		req.SetBasicAuth(c.Username, c.APIToken)
+	}
+
 	req.Header.Set("Jenkins-Crumb", c.Crumb)
 	req.Header.Set("Content-Type", "application/x-www-form-urlencoded")
 	resp, err := c.client.Do(req)
+	if err != nil {
+		return "", err
+	}
 
 	body, err := ioutil.ReadAll(resp.Body)
 	if err != nil {

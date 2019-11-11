@@ -14,7 +14,10 @@ go get -u github.com/eastwd/jenkins-lint
 
 ## usage
 
-.jlint.tomlをホームディレクトリに作成
+- API tokenを発行
+  - https://[your jenkins url]/user/[your name]/configure
+
+- .jlint.tomlをホームディレクトリに作成
 
 ```
 [Client]
@@ -22,8 +25,8 @@ go get -u github.com/eastwd/jenkins-lint
   TLSVerify = true
 
 [Account]
-  Username = ""
-  Password = ""
+  Username = "your name"
+  APIToken = "your API token"
 
 ```
 
