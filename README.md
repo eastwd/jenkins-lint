@@ -9,7 +9,7 @@ Jenkinsfile linter
 ## install
 
 ```
-go get -u github.com/eastwd/jenkins-lint
+go install github.com/eastwd/jenkins-lint
 ```
 
 ## usage

@@ -16,6 +16,7 @@ func main() {
 	app.Name = "jenkins-lint"
 	app.Usage = "Jenkinsfileのlinter"
 	app.Description = "JenkinsのバリデーションAPIにアクセスし、Jenkinsfileの構文チェックをする"
+	app.Version = "0.2.0"
 	app.Commands = []cli.Command{
 		{
 			Name:    "config",
