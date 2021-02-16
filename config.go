@@ -2,7 +2,7 @@ package main
 
 import (
 	"bytes"
-	"log"
+	"fmt"
 	"path/filepath"
 
 	"github.com/BurntSushi/toml"
@@ -51,7 +51,7 @@ var config Config
 func (c *Config) String() string {
 	buf := new(bytes.Buffer)
 	if err := toml.NewEncoder(buf).Encode(config); err != nil {
-		log.Fatal(err)
+		fmt.Println(err)
 		return ""
 	}
 	return buf.String()
