@@ -14,14 +14,14 @@ func main() {
 
 	app := cli.NewApp()
 	app.Name = "jenkins-lint"
-	app.Usage = "Jenkinsfileのlinter"
-	app.Description = "JenkinsのバリデーションAPIにアクセスし、Jenkinsfileの構文チェックをする"
-	app.Version = "0.2.0"
+	app.Usage = "Linter of Jenkinsfile"
+	app.Description = "Access the Jenkins validation API and lint Jenkinsfile"
+	app.Version = "0.3.0"
 	app.Commands = []cli.Command{
 		{
 			Name:    "config",
 			Aliases: []string{"c"},
-			Usage:   "現在の設定を表示します",
+			Usage:   "Print current configuration",
 			Action:  configCmd,
 		},
 	}

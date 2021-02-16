@@ -45,7 +45,7 @@ var lintCmdFlags = []cli.Flag{
 	cli.StringFlag{
 		Name:  "file, f",
 		Value: "Jenkinsfile",
-		Usage: "Jenkinsfileのパス",
+		Usage: "Relative path of Jenkinsfile",
 	},
 }
 
