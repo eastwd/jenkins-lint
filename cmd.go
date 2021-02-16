@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"log"
 	"strings"
 
 	"github.com/eastwd/jenkins-lint/jenkins"
@@ -17,22 +16,19 @@ var lintCmd = func(c *cli.Context) error {
 	//JenkinsのCrumbを取得
 	err := client.FetchCrumb()
 	if err != nil {
-		log.Fatal(err)
-		return nil
+		return err
 	}
 
 	//Jenkinsfileの読み込み
 	jenkinsfile, err := jenkins.ReadJenkinsfile(c.String("file"))
 	if err != nil {
-		log.Fatal(err)
-		return nil
+		return err
 	}
 
 	//バリデーションの結果を取得
 	result, err := client.Validate(jenkinsfile)
 	if err != nil {
-		log.Fatal(err)
-		return nil
+		return err
 	}
 
 	if !strings.Contains(result, successMessage) {
@@ -49,7 +45,7 @@ var lintCmdFlags = []cli.Flag{
 	cli.StringFlag{
 		Name:  "file, f",
 		Value: "Jenkinsfile",
-		Usage: "Jenkinsfileのパス",
+		Usage: "Relative path of Jenkinsfile",
 	},
 }
 
