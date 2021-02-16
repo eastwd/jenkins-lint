@@ -4,20 +4,20 @@ Jenkinsfile linter
 
 ## description
 
-- JenkinsのAPIにアクセスし、Jenkinsfileの構文チェックをするツール
+- Access the Jenkins validation API and lint Jenkinsfile
 
 ## install
 
 ```
-go install github.com/eastwd/jenkins-lint
+go get -u  github.com/eastwd/jenkins-lint
 ```
 
-## usage
+## setting
 
-- API tokenを発行
+- Generate your API token
   - https://[your jenkins url]/user/[your name]/configure
 
-- .jlint.tomlをホームディレクトリに作成
+- Create .jlint.toml in home directory
 
 ```
 [Client]
@@ -30,7 +30,7 @@ go install github.com/eastwd/jenkins-lint
 
 ```
 
-Jenkinsfileのパスを指定して実行
+## usage
 
 ```
 $ jenkins-lint -f ./test/Jenkinsfile
