@@ -36,10 +36,7 @@ jobs:
           username: ${{ github.repository_owner }}
           password: ${{ secrets.PATOEKN }}
       - name: Build and push
-        uses: docker/build-push-action@v2
-        with:
-          context: .
-          push: true
-          tags: |
-            ghcr.io/${{ github.repository }}:latest
-            ghcr.io/${{ github.repository }}:${{ steps.get_tag.outputs.TAG }}
+        run: |
+          TAG=$(echo ${{ github.ref }} | sed -e "s#refs/tags/##g" )
+          docker build ./ -t ghcr.io/eastwd/jenkins-lint:${TAG} -t ghcr.io/eastwd/jenkins-lint:latest
+          docker push ghcr.io/eastwd/jenkins-lint:${TAG}
