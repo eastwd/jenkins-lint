@@ -39,4 +39,4 @@ jobs:
         run: |
           TAG=$(echo ${{ github.ref }} | sed -e "s#refs/tags/##g" )
           docker build ./ -t ghcr.io/eastwd/jenkins-lint:${TAG} -t ghcr.io/eastwd/jenkins-lint:latest
-          docker push ghcr.io/eastwd/jenkins-lint:${TAG}
+          docker push ghcr.io/eastwd/jenkins-lint
