@@ -22,12 +22,11 @@ go get -u  github.com/eastwd/jenkins-lint
 ```
 [Client]
   Host = "http://localhost:8080"
-  TLSVerify = true
+  Insecure = false
 
 [Account]
   Username = "your name"
   APIToken = "your API token"
-
 ```
 
 ## usage
