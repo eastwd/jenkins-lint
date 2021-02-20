@@ -11,7 +11,15 @@ import (
 var lintCmd = func(c *cli.Context) error {
 	jc := config.Client
 	ja := config.Account
-	client := jenkins.NewClient(jc.Host, jc.Insecure, ja.Username, ja.APIToken)
+	username := ja.Username
+	if c.String("username") != "" {
+		username = c.String("username")
+	}
+	apiToken := ja.APIToken
+	if c.String("token") != "" {
+		apiToken = c.String("token")
+	}
+	client := jenkins.NewClient(jc.Host, jc.Insecure, username, apiToken)
 
 	//JenkinsのCrumbを取得
 	err := client.FetchCrumb()
@@ -46,6 +54,16 @@ var lintCmdFlags = []cli.Flag{
 		Name:  "file, f",
 		Value: "Jenkinsfile",
 		Usage: "Relative path of Jenkinsfile",
+	},
+	cli.StringFlag{
+		Name:  "username, u",
+		Value: "",
+		Usage: "Relative path of Jenkinsfile",
+	},
+	cli.StringFlag{
+		Name:  "token, t",
+		Value: "",
+		Usage: "Jenkins API token",
 	},
 }
 
