@@ -10,12 +10,12 @@ import (
 )
 
 type Client struct {
-	Host      string
-	Username  string
-	APIToken  string
-	Crumb     string
-	TlsVerify bool
-	client    *http.Client
+	Host     string
+	Username string
+	APIToken string
+	Crumb    string
+	Insecure bool
+	client   *http.Client
 }
 
 var (
@@ -23,10 +23,10 @@ var (
 	validateUrlFormat = "%s/pipeline-model-converter/validate"
 )
 
-func NewClient(host string, tlsVerify bool, username string, apiToken string) *Client {
+func NewClient(host string, insecure bool, username string, apiToken string) *Client {
 	tr := &http.Transport{
 		TLSClientConfig: &tls.Config{
-			InsecureSkipVerify: tlsVerify,
+			InsecureSkipVerify: insecure,
 		},
 	}
 	c := &http.Client{Transport: tr}

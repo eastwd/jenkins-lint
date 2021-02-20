@@ -15,8 +15,8 @@ type Config struct {
 }
 
 type ClientConfig struct {
-	Host      string
-	TLSVerify bool
+	Host     string
+	Insecure bool
 }
 
 type AccountConfig struct {
@@ -36,8 +36,8 @@ func NewConfig() {
 func DefaultConfig() Config {
 	return Config{
 		Client: ClientConfig{
-			Host:      defaultHost,
-			TLSVerify: true,
+			Host:     defaultHost,
+			Insecure: false,
 		},
 		Account: AccountConfig{
 			Username: "",
