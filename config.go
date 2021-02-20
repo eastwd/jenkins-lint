@@ -26,8 +26,8 @@ type AccountConfig struct {
 
 func NewConfig() {
 	home, _ := homedir.Dir()
-	if _, err := toml.DecodeFile(filepath.Join(home, configName), &config); err != nil {
-		if _, err2 := toml.DecodeFile(defaultConfigPath, &config); err2 != nil {
+	if _, err := toml.DecodeFile(defaultConfigPath, &config); err != nil {
+		if _, err2 := toml.DecodeFile(filepath.Join(home, configName), &config); err2 != nil {
 			config = DefaultConfig()
 		}
 	}
