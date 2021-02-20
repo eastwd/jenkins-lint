@@ -58,7 +58,7 @@ var lintCmdFlags = []cli.Flag{
 	cli.StringFlag{
 		Name:  "username, u",
 		Value: "",
-		Usage: "Relative path of Jenkinsfile",
+		Usage: "Jenkins username",
 	},
 	cli.StringFlag{
 		Name:  "token, t",

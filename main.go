@@ -16,7 +16,7 @@ func main() {
 	app.Name = "jenkins-lint"
 	app.Usage = "Linter of Jenkinsfile"
 	app.Description = "Access the Jenkins validation API and lint Jenkinsfile"
-	app.Version = "0.3.0"
+	app.Version = "0.3.4"
 	app.Commands = []cli.Command{
 		{
 			Name:    "config",
