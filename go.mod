@@ -6,4 +6,9 @@ require (
 	github.com/urfave/cli v1.22.15
 )
 
-go 1.13
+require (
+	github.com/cpuguy83/go-md2man/v2 v2.0.5 // indirect
+	github.com/russross/blackfriday/v2 v2.1.0 // indirect
+)
+
+go 1.23

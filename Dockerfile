@@ -1,4 +1,4 @@
-FROM golang:1.16-alpine as builder
+FROM golang:1.23-alpine as builder
 
 ENV APP_DIR=/go/src/github.com/eastwd/jenkins-lint
 
