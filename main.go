@@ -1,10 +1,11 @@
 package main
 
 import (
+	"context"
 	"fmt"
 	"os"
 
-	"github.com/urfave/cli"
+	"github.com/urfave/cli/v3"
 )
 
 func main() {
@@ -12,23 +13,24 @@ func main() {
 	//configの読み込み
 	NewConfig()
 
-	app := cli.NewApp()
-	app.Name = "jenkins-lint"
-	app.Usage = "Linter of Jenkinsfile"
-	app.Description = "Access the Jenkins validation API and lint Jenkinsfile"
-	app.Version = "0.3.4"
-	app.Commands = []cli.Command{
-		{
-			Name:    "config",
-			Aliases: []string{"c"},
-			Usage:   "Print current configuration",
-			Action:  configCmd,
+	app := &cli.Command{
+		Name:        "jenkins-lint",
+		Usage:       "Linter of Jenkinsfile",
+		Description: "Access the Jenkins validation API and lint Jenkinsfile",
+		Version:     "0.3.4",
+		Commands: []*cli.Command{
+			{
+				Name:    "config",
+				Aliases: []string{"c"},
+				Usage:   "Print current configuration",
+				Action:  configCmd,
+			},
 		},
+		Action: lintCmd,
+		Flags:  lintCmdFlags,
 	}
-	app.Action = lintCmd
-	app.Flags = lintCmdFlags
 
-	err := app.Run(os.Args)
+	err := app.Run(context.Background(), os.Args)
 	if err != nil {
 		fmt.Println(err)
 	}

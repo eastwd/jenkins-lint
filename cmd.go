@@ -1,14 +1,15 @@
 package main
 
 import (
+	"context"
 	"fmt"
 	"strings"
 
 	"github.com/eastwd/jenkins-lint/jenkins"
-	"github.com/urfave/cli"
+	"github.com/urfave/cli/v3"
 )
 
-var lintCmd = func(c *cli.Context) error {
+var lintCmd = func(_ context.Context, c *cli.Command) error {
 	jc := config.Client
 	ja := config.Account
 	username := ja.Username
@@ -50,24 +51,27 @@ var lintCmd = func(c *cli.Context) error {
 }
 
 var lintCmdFlags = []cli.Flag{
-	cli.StringFlag{
-		Name:  "file, f",
-		Value: "Jenkinsfile",
-		Usage: "Relative path of Jenkinsfile",
+	&cli.StringFlag{
+		Name:    "file",
+		Aliases: []string{"f"},
+		Value:   "Jenkinsfile",
+		Usage:   "Relative path of Jenkinsfile",
 	},
-	cli.StringFlag{
-		Name:  "username, u",
-		Value: "",
-		Usage: "Jenkins username",
+	&cli.StringFlag{
+		Name:    "username",
+		Aliases: []string{"u"},
+		Value:   "",
+		Usage:   "Jenkins username",
 	},
-	cli.StringFlag{
-		Name:  "token, t",
-		Value: "",
-		Usage: "Jenkins API token",
+	&cli.StringFlag{
+		Name:    "token",
+		Aliases: []string{"t"},
+		Value:   "",
+		Usage:   "Jenkins API token",
 	},
 }
 
-var configCmd = func(c *cli.Context) error {
+var configCmd = func(_ context.Context, c *cli.Command) error {
 	config.Account.APIToken = strings.Repeat("*", len(config.Account.APIToken))
 	fmt.Println(config.String())
 	return nil

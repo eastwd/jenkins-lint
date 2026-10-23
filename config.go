@@ -3,10 +3,10 @@ package main
 import (
 	"bytes"
 	"fmt"
+	"os"
 	"path/filepath"
 
 	"github.com/BurntSushi/toml"
-	homedir "github.com/mitchellh/go-homedir"
 )
 
 type Config struct {
@@ -25,7 +25,7 @@ type AccountConfig struct {
 }
 
 func NewConfig() {
-	home, _ := homedir.Dir()
+	home, _ := os.UserHomeDir()
 	if _, err := toml.DecodeFile(defaultConfigPath, &config); err != nil {
 		if _, err2 := toml.DecodeFile(filepath.Join(home, configName), &config); err2 != nil {
 			config = DefaultConfig()
