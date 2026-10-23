@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"fmt"
 	"os"
+	"os/user"
 	"path/filepath"
 
 	"github.com/BurntSushi/toml"
@@ -24,8 +25,18 @@ type AccountConfig struct {
 	APIToken string
 }
 
+func homeDir() string {
+	if home, err := os.UserHomeDir(); err == nil {
+		return home
+	}
+	if u, err := user.Current(); err == nil {
+		return u.HomeDir
+	}
+	return ""
+}
+
 func NewConfig() {
-	home, _ := os.UserHomeDir()
+	home := homeDir()
 	if _, err := toml.DecodeFile(defaultConfigPath, &config); err != nil {
 		if _, err2 := toml.DecodeFile(filepath.Join(home, configName), &config); err2 != nil {
 			config = DefaultConfig()
